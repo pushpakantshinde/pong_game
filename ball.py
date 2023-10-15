@@ -12,8 +12,21 @@ class Ball(Turtle):
         self.speed("fastest")
         self.x_move = 10
         self.y_move = 10
+        self.ball_speed = 0.1
 
     def move(self):
         new_x = self.xcor() + self.x_move
         new_y = self.ycor() + self.y_move
         self.goto(new_x, new_y)
+
+    def bounce_from_horizontal_walls(self):
+        self.y_move *= -1
+
+    def bounce_from_paddles(self):
+        self.x_move *= -1
+        self.ball_speed *= 0.9                  # Increasing ball speed everytime ball hits the paddles
+
+    def reset_position(self):
+        self.home()
+        self.ball_speed = 0.1
+        self.x_move *= -1
